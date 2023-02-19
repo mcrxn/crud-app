@@ -2,6 +2,7 @@
   "name": "demo1",
   "version": "0.0.0",
   "scripts": {
+    "server": "json-server --watch server/db.json",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -18,6 +19,8 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "bootstrap": "^5.2.3",
+    "font-awesome": "^4.7.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -28,6 +31,7 @@
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
+    "json-server": "^0.17.1",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
