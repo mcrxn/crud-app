@@ -4,6 +4,11 @@
       "label": "Filip 123",
       "gender": "F",
       "id": 1
+    },
+    {
+      "label": "test 2",
+      "gender": "M",
+      "id": 2
     }
   ]
 }
