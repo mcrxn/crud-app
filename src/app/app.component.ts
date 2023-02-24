@@ -17,10 +17,13 @@ export class AppComponent {
   }
 
   saveHandler(form: NgForm) {
-    // form.value.creationDate = Date.now();
+    if (!this.usersService.selectedUser) {
+      form.value.creationDate = Date.now();
+    }
     this.usersService.saveHandler(form.value as User).subscribe({
       next: () => {
         form.reset({ gender: '' });
+        this.usersService.clearHandler();
         this.error = null;
       },
       error: () => {

@@ -19,6 +19,7 @@ export class UsersService {
   deleteUser(userToRemove: User) {
     this.http.delete(`${this.URL}/users/${userToRemove.id}`).subscribe(() => {
       this.users = this.users.filter((u) => u.id !== userToRemove.id);
+      this.clearHandler();
     });
   }
 
