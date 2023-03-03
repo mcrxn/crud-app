@@ -1,0 +1,96 @@
+<div class="container">
+  <h1>Reactive</h1>
+
+  <form
+    class="card card-body mt-3"
+    [formGroup]="userForm"
+    (ngSubmit)="submit()"
+    [ngClass]="{
+      male: userForm.value.gender === 'M',
+      female: userForm.value.gender === 'F'
+    }"
+  >
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Add user name"
+      formControlName="label"
+      [ngClass]="{ 'is-invalid': label?.invalid && label?.dirty }"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="label?.errors?.['required'] && label?.dirty"
+    >
+      Name is required!
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="label?.errors?.['minlength'] && label?.dirty"
+    >
+      Name must contain atleast 3 characters!
+    </div>
+    <select
+      class="form-control"
+      formControlName="gender"
+      [ngClass]="{
+        'is-invalid': gender?.invalid && gender?.dirty
+      }"
+    >
+      <option value="">Select Option</option>
+      <option value="M">M</option>
+      <option value="F">F</option>
+    </select>
+    <div
+      class="alert alert-danger"
+      *ngIf="gender?.errors?.['required'] && gender?.dirty"
+    >
+      Please select gender!
+    </div>
+    <div class="btn-group">
+      <button
+        type="submit"
+        class="btn"
+        [disabled]="userForm.invalid"
+        [ngClass]="{
+          'btn-success': userForm.valid,
+          'btn-danger': userForm.invalid
+        }"
+      >
+        Save
+      </button>
+      <button
+        class="btn btn-light"
+        (click)="resetForm()"
+        type="button"
+        *ngIf="usersService.selectedUser"
+      >
+        Clear
+      </button>
+    </div>
+  </form>
+  <hr />
+  <ul class="list-group">
+    <li
+      *ngFor="let u of usersService.users"
+      class="list-group-item"
+      [ngClass]="{
+        male: u.gender === 'M',
+        female: u.gender === 'F',
+        selected: u.id === usersService.selectedUser?.id
+      }"
+    >
+      <i
+        (click)="selectedUser(u)"
+        class="fa fa-3x"
+        [ngClass]="{
+          'fa-mars': u.gender === 'M',
+          'fa-venus': u.gender === 'F'
+        }"
+      >
+        {{ u.label }} {{ u.creationDate | date : "medium" }}</i
+      >
+
+      <i class="fa fa-trash fa-3x pull-right" (click)="deleteUser(u)"></i>
+    </li>
+  </ul>
+</div>
